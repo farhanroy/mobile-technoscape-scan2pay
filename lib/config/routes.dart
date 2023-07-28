@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:scan2pay/modules/authentication/authentication.dart';
 
 import '../modules/modules.dart';
 
@@ -11,7 +12,10 @@ class Routes {
     GetPage(
         name: splash,
         page: () => const SplashScreen(),
-      binding: SplashBinding()
-    )
+        binding: SplashBinding()),
+    GetPage(
+        name: register,
+        page: () => RegisterScreen(),
+        binding: RegisterBinding())
   ];
 }
