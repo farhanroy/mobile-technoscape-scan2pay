@@ -7,6 +7,7 @@ class Routes {
   static const splash = '/splash';
   static const login = '/login';
   static const register = '/register';
+  static const setupPin = '/setupPin';
 
   static final list = [
     GetPage(
@@ -16,6 +17,10 @@ class Routes {
     GetPage(
         name: register,
         page: () => RegisterScreen(),
-        binding: RegisterBinding())
+        binding: RegisterBinding()),
+    GetPage(
+        name: setupPin,
+        page: () => SetupPinScreen(),
+        binding: SetupPinBinding())
   ];
 }

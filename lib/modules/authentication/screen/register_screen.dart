@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scan2pay/modules/authentication/authentication.dart';
 
+import '../../../config/themes.dart';
 import '../../../config/routes.dart';
+import '../authentication.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends GetView<RegisterController> {
   RegisterScreen({super.key});
 
   final _nameController = TextEditingController();
@@ -12,7 +13,6 @@ class RegisterScreen extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final controller = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ class RegisterScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFACC15),
+                      backgroundColor: Themes.primaryColor,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
