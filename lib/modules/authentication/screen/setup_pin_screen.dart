@@ -15,6 +15,16 @@ class SetupPinScreen extends GetView<SetupPinController> {
       height: 20,
       textStyle: TextStyle(color: Get.theme.primaryColor),
       decoration: BoxDecoration(
+        color: Get.theme.primaryColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+
+    final followedPindTheme = PinTheme(
+      width: 20,
+      height: 20,
+      textStyle: TextStyle(color: Get.theme.primaryColor),
+      decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFF94A3B8)),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -25,7 +35,7 @@ class SetupPinScreen extends GetView<SetupPinController> {
       height: 20,
       textStyle: TextStyle(color: Get.theme.primaryColor),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFF94A3B8)),
+        color: Get.theme.primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
     );
@@ -73,10 +83,14 @@ class SetupPinScreen extends GetView<SetupPinController> {
             ),
             const SizedBox(height: 28),
             Pinput(
+              crossAxisAlignment: CrossAxisAlignment.center,
               defaultPinTheme: defaultPinTheme,
               focusedPinTheme: focusedPinTheme,
               submittedPinTheme: submittedPinTheme,
               errorPinTheme: erroredPinTheme,
+              followingPinTheme: followedPindTheme,
+              length: 6,
+              obscureText: true,
               validator: (s) {
                 return s == '222222' ? null : 'Pin is incorrect';
               },
