@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:scan2pay/modules/authentication/authentication.dart';
 
 import '../modules/modules.dart';
 
@@ -8,6 +7,12 @@ class Routes {
   static const login = '/login';
   static const register = '/register';
   static const setupPin = '/setupPin';
+  static const dashboard = '/dashboard';
+  static const profile = '/profile';
+  static const history = '/history';
+  static const scanner = '/scanner';
+  static const preview = '/preview';
+  static const home = '/home';
 
   static final list = [
     GetPage(
@@ -20,7 +25,28 @@ class Routes {
         binding: RegisterBinding()),
     GetPage(
         name: setupPin,
-        page: () => SetupPinScreen(),
-        binding: SetupPinBinding())
+        page: () => const SetupPinScreen(),
+        binding: SetupPinBinding()),
+    GetPage(
+        name: dashboard,
+        page: () => const DashboardScreen(),
+        binding: DahsboardBinding()),
+    GetPage(
+        name: profile,
+        page: () => const ProfileScreen(),
+        binding: ProfileBinding()),
+    GetPage(
+        name: history,
+        page: () => const HistoryScreen(),
+        binding: HistoryBinding()),
+    GetPage(
+        name: scanner,
+        page: () => const DashboardScreen(),
+        binding: ScannerBinding()),
+    GetPage(
+      name: preview,
+      page: () => PreviewScreen(),
+      binding: PreviewBinding(),
+    )
   ];
 }
