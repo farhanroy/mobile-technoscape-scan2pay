@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../../config/routes.dart';
 import '../dashboard.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -39,7 +40,7 @@ class DashboardScreen extends GetView<DashboardController> {
           ),
           PersistentBottomNavBarItem(
             icon: const Icon(
-              Icons.adf_scanner_outlined,
+              Icons.qr_code_2,
               size: 30,
               color: Colors.black54,
             ),
@@ -67,33 +68,43 @@ class DashboardScreen extends GetView<DashboardController> {
         ];
 
     return Scaffold(
-        body: PersistentTabView(
-      context,
-      padding: const NavBarPadding.only(bottom: 15),
-      navBarHeight: 80,
-      screens: buildScreens(),
-      items: navBarsItems(),
-      confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+      body: PageView(
+        controller: controller.pageController,
+        children: buildScreens(),
+        onPageChanged: (index) {
+          // Update the selected tab index when the PageView changes.
+          PersistentTabController().jumpToTab(index);
+        },
       ),
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+      bottomNavigationBar: PersistentTabView(
+        context,
+        controller: PersistentTabController(initialIndex: 0),
+        screens: buildScreens(),
+        items: navBarsItems(),
+        confineInSafeArea: true,
+        backgroundColor: Colors.white,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+        hideNavigationBarWhenKeyboardShows: true,
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          colorBehindNavBar: Colors.white,
+        ),
+        popAllScreensOnTapOfSelectedTab: true,
+        popActionScreens: PopActionScreensType.all,
+        itemAnimationProperties: const ItemAnimationProperties(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.ease,
+        ),
+        navBarStyle: NavBarStyle.style15,
+        onItemSelected: (index) {
+          print(index);
+          if (index == 2) {
+            Get.toNamed(Routes.scanner);
+          }
+        },
       ),
-      navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property.
-    ));
+    );
   }
 }

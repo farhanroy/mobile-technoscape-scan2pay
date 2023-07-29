@@ -43,48 +43,50 @@ class LoginScreen extends GetView<LoginController> {
               ],
             ),
           ),
-          Container(
-            width: Get.width,
-            height: Get.height * 0.6955,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(18),
-                    topRight: Radius.circular(18))),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  TextField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Email'),
-                    controller: _emailController,
-                  ),
-                  const SizedBox(height: 24),
-                  Obx(() => TextField(
-                        obscureText: controller.isObscure.value,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: 'Password',
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  controller.isObscure.value =
-                                      !controller.isObscure.value;
-                                },
-                                icon: Icon(controller.isObscure.isTrue
-                                    ? Icons.visibility
-                                    : Icons.visibility_off))),
-                        controller: _passwordController,
-                      )),
-                  const SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {}, child: const Text('Lupa Password ?')),
-                  ),
-                  Obx(() {
+          SingleChildScrollView(
+            child: Container(
+              width: Get.width,
+              height: Get.height * 0.6955,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(18),
+                      topRight: Radius.circular(18))),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 40),
+                    TextField(
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(), labelText: 'Email'),
+                      controller: _emailController,
+                    ),
+                    const SizedBox(height: 24),
+                    Obx(() => TextField(
+                          obscureText: controller.isObscure.value,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: 'Password',
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    controller.isObscure.value =
+                                        !controller.isObscure.value;
+                                  },
+                                  icon: Icon(controller.isObscure.isTrue
+                                      ? Icons.visibility
+                                      : Icons.visibility_off))),
+                          controller: _passwordController,
+                        )),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: const Text('Lupa Password ?')),
+                    ),
+                    Obx(() {
                       if (controller.isLoading.isTrue) {
                         return ElevatedButton(
                           onPressed: null,
@@ -100,11 +102,12 @@ class LoginScreen extends GetView<LoginController> {
                       } else {
                         return ElevatedButton(
                           onPressed: () {
-                            controller.submit(_emailController.text, _passwordController.text)
+                            controller
+                                .submit(_emailController.text,
+                                    _passwordController.text)
                                 .then((value) {
-                                  Get.toNamed(Routes.setupPin);
-                            })
-                                .catchError((e) {
+                              Get.toNamed(Routes.setupPin);
+                            }).catchError((e) {
                               Fluttertoast.showToast(
                                   msg: e.toString(),
                                   toastLength: Toast.LENGTH_SHORT,
@@ -112,8 +115,7 @@ class LoginScreen extends GetView<LoginController> {
                                   timeInSecForIosWeb: 1,
                                   backgroundColor: Colors.red,
                                   textColor: Colors.white,
-                                  fontSize: 16.0
-                              );
+                                  fontSize: 16.0);
                             });
                           },
                           style: ElevatedButton.styleFrom(
@@ -133,19 +135,19 @@ class LoginScreen extends GetView<LoginController> {
                           ),
                         );
                       }
-                    }
-                  ),
-                  const SizedBox(height: 40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Belum punya akun? '),
-                      TextButton(
-                          onPressed: () => Get.toNamed(Routes.register),
-                          child: const Text('Dafter'))
-                    ],
-                  )
-                ],
+                    }),
+                    const SizedBox(height: 40),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Belum punya akun? '),
+                        TextButton(
+                            onPressed: () => Get.toNamed(Routes.register),
+                            child: const Text('Dafter'))
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           )
