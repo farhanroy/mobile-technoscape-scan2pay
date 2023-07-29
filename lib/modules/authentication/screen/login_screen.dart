@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../config/routes.dart';
@@ -13,6 +14,7 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Get.theme.colorScheme.secondary,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,6 +79,57 @@ class LoginScreen extends GetView<LoginController> {
                         onPressed: () {} ,
                         child: Text('Lupa Password ?')
                     ),
+                  ),
+                  Obx(() {
+                      if (controller.isLoading.isTrue) {
+                        return ElevatedButton(
+                          onPressed: null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white60,
+                            minimumSize: Size(Get.width, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ElevatedButton(
+                          onPressed: () {
+                            controller.submit(_emailController.text, _passwordController.text)
+                                .then((value) {
+                                  Get.toNamed(Routes.setupPin);
+                            })
+                                .catchError((e) {
+                              Fluttertoast.showToast(
+                                  msg: e.toString(),
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0
+                              );
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Get.theme.primaryColor,
+                            minimumSize: Size(Get.width, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Masuk',
+                            style: TextStyle(
+                              color: Color(0xFF334155),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                            ),
+                          ),
+                        );
+                      }
+                    }
                   ),
                   const SizedBox(height: 40),
                   Row(
