@@ -20,11 +20,17 @@ class CheckPinScreen extends GetView<CheckPinController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                Image.asset('assets/images/logo.png', width: 20, height: 26,),
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: 20,
+                  height: 26,
+                ),
                 const SizedBox(height: 40),
                 const Text('Halo, Selamat Datang \n di Scan2Pay 👋',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)
-                ),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24)),
                 const SizedBox(height: 24),
                 const Text('Silahkan login menggunakan akun kamu',
                     style: TextStyle(color: Colors.white54, fontSize: 12)),
@@ -39,18 +45,16 @@ class CheckPinScreen extends GetView<CheckPinController> {
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(18),
-                    topRight: Radius.circular(18)
-                )
-            ),
+                    topRight: Radius.circular(18))),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24),
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  Text('Masukan PIN', style: TextStyle(
-                   fontWeight: FontWeight.bold,
-                    fontSize: 22
-                  )),
+                  const Text('Masukan PIN',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
                   const SizedBox(height: 20),
                   Pinput(
                     defaultPinTheme: PinTheme(
@@ -63,6 +67,7 @@ class CheckPinScreen extends GetView<CheckPinController> {
                       ),
                     ),
                     showCursor: false,
+                    onSubmitted: (value) {},
                   )
                 ],
               ),
