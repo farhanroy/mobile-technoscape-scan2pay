@@ -5,7 +5,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../dashboard.dart';
 
-class HistoryScreen extends GetView<DashboardController> {
+class HistoryScreen extends GetView<HistoryController> {
   const HistoryScreen({super.key});
 
   @override

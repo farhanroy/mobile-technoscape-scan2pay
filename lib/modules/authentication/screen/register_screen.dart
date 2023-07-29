@@ -119,8 +119,8 @@ class RegisterScreen extends GetView<RegisterController> {
                         ),
                       )),
                   const SizedBox(height: 20),
-                  // elevated button #FACC15
                   CommonButton(
+                    titleColor: const Color(0xFF334155),
                     color: Get.theme.primaryColor,
                     title: 'Daftar',
                     onTap: () {},

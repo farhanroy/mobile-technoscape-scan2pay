@@ -4,12 +4,13 @@ class CommonButton extends StatelessWidget {
   const CommonButton({
     super.key,
     required this.color,
+    required this.titleColor,
     required this.title,
     this.onTap,
   });
 
   final String title;
-  final Color color;
+  final Color color, titleColor;
   final VoidCallback? onTap;
 
   @override
@@ -25,8 +26,8 @@ class CommonButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Color(0xFF334155),
+        style: TextStyle(
+          color: titleColor,
           fontWeight: FontWeight.w700,
           fontSize: 14,
         ),

@@ -126,6 +126,7 @@ class PreviewMainPanel extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 CommonButton(
+                  titleColor: const Color(0xFF334155),
                   color: Get.theme.primaryColor,
                   title: 'Bayar',
                   onTap: () {},
