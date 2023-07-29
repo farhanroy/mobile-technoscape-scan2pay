@@ -64,6 +64,8 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 /build
+.dart-tool
+pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
