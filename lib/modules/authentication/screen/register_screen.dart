@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-import '../../../config/themes.dart';
 import '../../../config/routes.dart';
 import '../../../models/user_model.dart';
+import '../../../widgets/widgets.dart';
 import '../authentication.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
@@ -123,6 +123,7 @@ class RegisterScreen extends GetView<RegisterController> {
                         }).toList(),
                         onChanged: (int? value) => controller.changeGender(value!),
                       )),
+
                     ),
                     const SizedBox(height: 20),
                     TextField(
@@ -241,6 +242,26 @@ class RegisterScreen extends GetView<RegisterController> {
                     ),
                   ],
                 ),
+
+                  const SizedBox(height: 20),
+                  CommonButton(
+                    titleColor: const Color(0xFF334155),
+                    color: Get.theme.primaryColor,
+                    title: 'Daftar',
+                    onTap: () {},
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Sudah punya akun?'),
+                      TextButton(
+                        onPressed: () => Get.toNamed(Routes.login),
+                        child: const Text('Masuk'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
