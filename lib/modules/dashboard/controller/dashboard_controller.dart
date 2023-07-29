@@ -8,6 +8,7 @@ import '../../../services/transaction_service.dart';
 
 class DashboardController extends GetxController with StateMixin<List<TransactionModel>> {
 
+  final pageController = PageController();
   final _transactionService = TransactionService();
 
   final userId = ''.obs;

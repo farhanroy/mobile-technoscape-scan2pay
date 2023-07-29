@@ -127,10 +127,13 @@ class ScanScreen extends GetView<ScanController> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
-    this.controllerScanner = controller;
+    controllerScanner = controller;
     controller.scannedDataStream.listen((scanData) {
       result = scanData;
-      Get.toNamed(Routes.pin, arguments: scanData.code);
+      if (scanData.code != null) {
+        print(scanData.code);
+        Get.toNamed(Routes.pin, arguments: scanData.code);
+      }
     });
   }
 }

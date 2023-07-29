@@ -79,6 +79,12 @@ class DashboardScreen extends GetView<DashboardController> {
       bottomNavigationBar: PersistentTabView(
         context,
         controller: PersistentTabController(initialIndex: 0),
+        onItemSelected: (index) {
+          print(index);
+          if (index == 2) {
+            Get.toNamed(Routes.scanner);
+          }
+        },
         screens: buildScreens(),
         items: navBarsItems(),
         confineInSafeArea: true,
@@ -98,22 +104,8 @@ class DashboardScreen extends GetView<DashboardController> {
           curve: Curves.ease,
         ),
         navBarStyle: NavBarStyle.style15,
-        onItemSelected: (index) {
-          print(index);
-          if (index == 2) {
-            Get.toNamed(Routes.scanner);
-          }
-        },
 
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-
-      itemAnimationProperties: const ItemAnimationProperties(
-        // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
-
-      ),
+      )
     );
   }
 }
