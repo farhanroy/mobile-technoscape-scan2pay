@@ -26,7 +26,7 @@ class PinScreen extends GetView<PinController> {
           ),
           1,
         ),
-        panel: const PinMainPanel(),
+        panel: PinMainPanel(),
         body: const PinBodyPanel(),
       ),
     );
@@ -34,7 +34,9 @@ class PinScreen extends GetView<PinController> {
 }
 
 class PinMainPanel extends StatelessWidget {
-  const PinMainPanel({super.key});
+  PinMainPanel({super.key});
+
+  final _amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class PinMainPanel extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           TextField(
+            controller: _amountController,
             autofocus: true,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
@@ -90,7 +93,7 @@ class PinMainPanel extends StatelessWidget {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly
             ],
-            onSubmitted: (_) => Get.toNamed(Routes.summary),
+            onSubmitted: (_) => Get.toNamed(Routes.summary, arguments: {'id': Get.arguments, 'amount': _amountController.text}),
           ),
           const SizedBox(height: 24),
         ],
@@ -109,7 +112,7 @@ class PinBodyPanel extends StatelessWidget {
         toolbarHeight: 70,
         elevation: 0,
         title: const Text(
-          'PIN',
+          'Jumlah',
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,
