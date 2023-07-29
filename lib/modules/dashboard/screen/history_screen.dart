@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scan2pay/widgets/widgets.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -25,7 +26,7 @@ class HistoryScreen extends GetView<HistoryController> {
           ),
           1,
         ),
-        panel: const HistoryMainPanel(),
+        panel: HistoryMainPanel(),
         body: const HistoryBodyPanel(),
       ),
     );
@@ -33,7 +34,9 @@ class HistoryScreen extends GetView<HistoryController> {
 }
 
 class HistoryMainPanel extends StatelessWidget {
-  const HistoryMainPanel({super.key});
+  HistoryMainPanel({super.key});
+
+  final dashboardController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,45 +94,53 @@ class HistoryMainPanel extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return TransactionItem(
-                      logo: Image.asset(
-                        'assets/images/logo-transaction.png',
-                        width: 56,
-                        height: 56,
-                      ),
-                      title: 'Warteg Malabar',
-                      date: '28 Juli',
-                      amount: '40k',
-                      amountColor: const Color(0xFFEF4444),
-                    );
-                  }),
+              child: dashboardController.obx((state) {
+                final list = state!.where((element) => element.senderId == dashboardController.userId.value).toList();
+                  return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return TransactionItem(
+                          logo: Image.asset(
+                            'assets/images/logo-transaction.png',
+                            width: 56,
+                            height: 56,
+                          ),
+                          title: list[index].receiver!.name!,
+                          date: DateFormat.yMMM().format(state[index].createdAt),
+                          amount: "${state[index].amount / 1000}k",
+                          amountColor: const Color(0xFFEF4444),
+                        );
+                      });
+                }
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return TransactionItem(
-                      logo: Image.asset(
-                        'assets/images/logo-transaction.png',
-                        width: 56,
-                        height: 56,
-                      ),
-                      title: 'Warteg Malabar',
-                      date: '28 Juli',
-                      amount: '40k',
-                      amountColor: const Color(0xFF10B981),
-                    );
-                  }),
+              child: dashboardController.obx((state) {
+                final list = state!.where((element) => element.senderId != dashboardController.userId.value).toList();
+                  return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return TransactionItem(
+                          logo: Image.asset(
+                            'assets/images/logo-transaction.png',
+                            width: 56,
+                            height: 56,
+                          ),
+                          title: list[index].sender!.name!,
+                          date: DateFormat.yMMM().format(state[index].createdAt),
+                          amount: "${state[index].amount / 1000}k",
+                          amountColor: const Color(0xFF10B981),
+                        );
+                      });
+                }
+              ),
             )
           ],
         ),
