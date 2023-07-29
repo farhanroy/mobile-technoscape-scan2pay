@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../config/themes.dart';
 import '../../../config/routes.dart';
+import '../../../widgets/widgets.dart';
 import '../authentication.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
@@ -120,23 +120,9 @@ class RegisterScreen extends GetView<RegisterController> {
                       )),
                   const SizedBox(height: 20),
                   // elevated button #FACC15
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Themes.primaryColor,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      'Daftar',
-                      style: TextStyle(
-                        color: Color(0xFF334155),
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
-                    ),
+                  CommonButton(
+                    color: Get.theme.primaryColor,
+                    title: 'Daftar',
                   ),
                   const SizedBox(height: 20),
                   Row(
