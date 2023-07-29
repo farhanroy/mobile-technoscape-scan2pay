@@ -13,6 +13,7 @@ class Routes {
   static const qrCode = '/qrCode';
   static const pin = '/pin';
   static const summary = '/summary';
+  static const summarySuccess = '/summary-success';
 
   static const dashboard = '/dashboard';
   static const profile = '/profile';
@@ -54,7 +55,7 @@ class Routes {
     GetPage(
       name: scanner,
       page: () => ScanScreen(),
-      binding: ScanBinding(),
+      binding: ScannerBinding(),
     ),
     GetPage(
       name: preview,
@@ -75,6 +76,11 @@ class Routes {
       name: summary,
       page: () => const SummaryScreen(),
       binding: SummaryBinding(),
+    ),
+    GetPage(
+      name: summarySuccess,
+      page: () => const SummarySuccessScreen(),
+      binding: SummarySuccessBinding(),
     )
   ];
 }
