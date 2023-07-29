@@ -21,9 +21,6 @@ class SetupPinScreen extends GetView<SetupPinController> {
     );
 
     final followedPindTheme = PinTheme(
-      width: 20,
-      height: 20,
-      textStyle: TextStyle(color: Get.theme.primaryColor),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFF94A3B8)),
         borderRadius: BorderRadius.circular(20),
@@ -41,7 +38,7 @@ class SetupPinScreen extends GetView<SetupPinController> {
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: const Color(0xFF94A3B8)),
+      color: const Color(0xFF334155),
       borderRadius: BorderRadius.circular(20),
     );
 
