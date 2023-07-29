@@ -1,4 +1,4 @@
-#Sat Jul 29 08:07:17 ICT 2023
+#Sat Jul 29 08:56:21 ICT 2023
 base.0=D\:\\Kuliah\\Kuliah\\Project\\Funey\\mobile-technoscape-funey\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

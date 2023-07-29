@@ -5,15 +5,17 @@ class CommonButton extends StatelessWidget {
     super.key,
     required this.color,
     required this.title,
+    this.onTap,
   });
 
   final String title;
   final Color color;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onTap,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         minimumSize: const Size(double.infinity, 50),

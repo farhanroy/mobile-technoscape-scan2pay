@@ -24,15 +24,15 @@ class HomeScreen extends GetView<HomeScreen> {
           ),
           1,
         ),
-        panel: const MainPanel(),
-        body: const BodyPanel(),
+        panel: const HomeMainPanel(),
+        body: const HomeBodyPanel(),
       ),
     );
   }
 }
 
-class BodyPanel extends StatelessWidget {
-  const BodyPanel({super.key});
+class HomeBodyPanel extends StatelessWidget {
+  const HomeBodyPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +105,8 @@ class BodyPanel extends StatelessWidget {
   }
 }
 
-class MainPanel extends StatelessWidget {
-  const MainPanel({super.key});
+class HomeMainPanel extends StatelessWidget {
+  const HomeMainPanel({super.key});
 
   @override
   Widget build(BuildContext context) {

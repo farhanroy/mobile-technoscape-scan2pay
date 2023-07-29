@@ -123,6 +123,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   CommonButton(
                     color: Get.theme.primaryColor,
                     title: 'Daftar',
+                    onTap: () {},
                   ),
                   const SizedBox(height: 20),
                   Row(
