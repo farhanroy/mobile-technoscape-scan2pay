@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class TransactionItem extends StatelessWidget {
-  const TransactionItem(
-      {super.key,
-      required this.logo,
-      required this.title,
-      required this.date,
-      required this.amount});
+  const TransactionItem({
+    super.key,
+    required this.logo,
+    required this.title,
+    required this.date,
+    required this.amount,
+    required this.amountColor,
+  });
 
   final Image logo;
   final String title, date, amount;
+  final Color amountColor;
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +67,11 @@ class TransactionItem extends StatelessWidget {
           const Spacer(),
           Text(
             amount,
-            style: const TextStyle(
-                color: Color(0xFF10B981),
-                fontSize: 11,
-                fontWeight: FontWeight.w500),
+            style: TextStyle(
+              color: amountColor,
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),

@@ -136,6 +136,7 @@ class HomeMainPanel extends StatelessWidget {
                 title: 'Pembayaran Tagihan',
                 date: '28 Juli',
                 amount: '200k',
+                amountColor: const Color(0xFF10B981),
               );
             },
           ),
