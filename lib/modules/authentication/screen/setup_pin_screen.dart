@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
-import '../controller/controller.dart';
+import '../../../config/routes.dart';
+import '../controller/setup_pin_controller.dart';
 
 class SetupPinScreen extends GetView<SetupPinController> {
   const SetupPinScreen({super.key});
@@ -21,7 +22,11 @@ class SetupPinScreen extends GetView<SetupPinController> {
     );
 
     final followedPindTheme = PinTheme(
+
+      width: 20,
+      height: 20,
       decoration: BoxDecoration(
+        color: Colors.grey,
         border: Border.all(color: const Color(0xFF94A3B8)),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -30,15 +35,16 @@ class SetupPinScreen extends GetView<SetupPinController> {
     final defaultPinTheme = PinTheme(
       width: 20,
       height: 20,
-      textStyle: TextStyle(color: Get.theme.primaryColor),
       decoration: BoxDecoration(
-        color: Get.theme.primaryColor,
+        //color: Get.theme.primaryColor,
+        color: Colors.blue,
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      color: const Color(0xFF334155),
+      color: Colors.grey,
+      border: Border.all(color: const Color(0xFF94A3B8)),
       borderRadius: BorderRadius.circular(20),
     );
 
@@ -86,13 +92,13 @@ class SetupPinScreen extends GetView<SetupPinController> {
               submittedPinTheme: submittedPinTheme,
               errorPinTheme: erroredPinTheme,
               followingPinTheme: followedPindTheme,
-              length: 6,
               obscureText: true,
               validator: (s) {
                 return s == '222222' ? null : 'Pin is incorrect';
               },
               pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
               showCursor: false,
+              onSubmitted: (value) => controller.submit(value).then((value) => Get.toNamed(Routes.login)),
               onCompleted: (pin) {
                 if (kDebugMode) print(pin);
               },

@@ -67,6 +67,7 @@ class CheckPinScreen extends GetView<CheckPinController> {
                       ),
                     ),
                     showCursor: false,
+                    onSubmitted: (value) {},
                   )
                 ],
               ),

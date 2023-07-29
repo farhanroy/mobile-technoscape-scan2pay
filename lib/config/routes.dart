@@ -7,6 +7,9 @@ class Routes {
   static const login = '/login';
   static const register = '/register';
   static const setupPin = '/setupPin';
+
+  static const checkPin = '/checkPin';
+
   static const dashboard = '/dashboard';
   static const profile = '/profile';
   static const history = '/history';
@@ -20,6 +23,10 @@ class Routes {
         page: () => const SplashScreen(),
         binding: SplashBinding()),
     GetPage(
+        name: login,
+        page: () => LoginScreen(),
+        binding: LoginBinding()),
+    GetPage(
         name: register,
         page: () => RegisterScreen(),
         binding: RegisterBinding()),
@@ -28,6 +35,9 @@ class Routes {
         page: () => const SetupPinScreen(),
         binding: SetupPinBinding()),
     GetPage(
+        name: checkPin,
+        page: () => const CheckPinScreen(),
+        binding: CheckPinBinding()),
         name: dashboard,
         page: () => const DashboardScreen(),
         binding: DahsboardBinding()),
