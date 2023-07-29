@@ -63,7 +63,7 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
-.dart-tool
+.dart-tool/
 pubspec.lock
 
 # Android related
