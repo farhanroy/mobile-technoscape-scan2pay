@@ -38,6 +38,7 @@ class Routes {
         name: checkPin,
         page: () => const CheckPinScreen(),
         binding: CheckPinBinding()),
+  GetPage(
         name: dashboard,
         page: () => const DashboardScreen(),
         binding: DahsboardBinding()),

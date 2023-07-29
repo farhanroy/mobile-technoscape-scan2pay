@@ -212,7 +212,7 @@ class RegisterScreen extends GetView<RegisterController> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Themes.primaryColor,
+                            backgroundColor: Get.theme.primaryColor,
                             minimumSize: const Size(double.infinity, 50),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -245,7 +245,7 @@ class RegisterScreen extends GetView<RegisterController> {
 
                   const SizedBox(height: 20),
                   CommonButton(
-                    titleColor: const Color(0xFF334155),
+                    titleColor: Get.theme.colorScheme.secondary,
                     color: Get.theme.primaryColor,
                     title: 'Daftar',
                     onTap: () {},
