@@ -92,15 +92,12 @@ class SetupPinScreen extends GetView<SetupPinController> {
               submittedPinTheme: submittedPinTheme,
               errorPinTheme: erroredPinTheme,
               followingPinTheme: followedPindTheme,
+              length: 6,
               obscureText: true,
-              validator: (s) {
-                return s == '222222' ? null : 'Pin is incorrect';
-              },
               pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
               showCursor: false,
-              onSubmitted: (value) => controller.submit(value).then((value) => Get.toNamed(Routes.login)),
-              onCompleted: (pin) {
-                if (kDebugMode) print(pin);
+              onCompleted: (value) {
+                controller.submit(value).then((value) => Get.toNamed(Routes.dashboard));
               },
             ),
           ],

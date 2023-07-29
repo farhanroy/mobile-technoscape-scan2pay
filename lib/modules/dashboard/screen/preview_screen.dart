@@ -26,7 +26,7 @@ class PreviewScreen extends GetView<PreviewController> {
           1,
         ),
         panel: const PreviewMainPanel(),
-        body: const PreviewBodyPanel(),
+        body: PreviewBodyPanel(),
       ),
     );
   }
@@ -85,7 +85,7 @@ class PreviewMainPanel extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'IDR 150.000,-',
+                          'IDR 1.500.000,-',
                           style: TextStyle(
                             color: Color(0xFF0F172A),
                             fontSize: 16,
@@ -228,29 +228,34 @@ class ExplorList extends StatelessWidget {
 }
 
 class PreviewBodyPanel extends StatelessWidget {
-  const PreviewBodyPanel({super.key});
+  PreviewBodyPanel({super.key});
+
+  final profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: const Color(0xFF334155),
-        padding: EdgeInsets.only(
-          left: 16,
-          top: 60,
-          bottom: Get.height * 0.7,
-        ),
-        child: ListView.builder(
-            shrinkWrap: false,
-            padding: EdgeInsets.zero,
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            itemBuilder: ((context, index) {
-              return const CommonBanner(
-                title: 'Scan2Pay',
-                amount: 'IDR 1.000.000,-',
-                totalAmount: 'IDR 1.000.000,-',
-                limitAmount: 'IDR 1.000.000,-',
-              );
-            })));
+    return profileController.obx((state) {
+        return Container(
+            color: const Color(0xFF334155),
+            padding: EdgeInsets.only(
+              left: 16,
+              top: 60,
+              bottom: Get.height * 0.7,
+            ),
+            child: ListView.builder(
+                shrinkWrap: false,
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: ((context, index) {
+                  return CommonBanner(
+                    title: 'Scan2Pay',
+                    amount: "IDR ${(state?.totalCredit ?? 0) - (state?.limitCredit ?? 0)},-",
+                    totalAmount: "IDR ${state?.totalCredit ?? 0},-",
+                    limitAmount: "IDR ${state?.limitCredit ?? 0},-",
+                  );
+                })));
+      }
+    );
   }
 }

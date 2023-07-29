@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../config/routes.dart';
 import '../../../widgets/widgets.dart';
-import '../dashboard.dart';
+
+import '../controller/profile_controller.dart';
+
 
 class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
@@ -32,101 +35,106 @@ class ProfileScreen extends GetView<ProfileController> {
   }
 }
 
-class ProfileMainPanel extends StatelessWidget {
+class ProfileMainPanel extends GetView<ProfileController> {
   const ProfileMainPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 28),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Nama Lengkap',
-            style: TextStyle(
-              color: Color(0xFF0F172A),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
+    return controller.obx((state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Nama Lengkap',
+                style: TextStyle(
+                  color: Color(0xFF0F172A),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                  state?.name ?? "",
+                style: const TextStyle(
+                  color: Color(0xFF64748B),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Email',
+                style: TextStyle(
+                  color: Color(0xFF0F172A),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 14),
+               Text(
+              state?.email ?? "",
+                style: const TextStyle(
+                  color: Color(0xFF64748B),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Gender',
+                style: TextStyle(
+                  color: Color(0xFF0F172A),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                state?.gender == 0 ? "Laki-Laki": "Perempuan",
+                style: const TextStyle(
+                  color: Color(0xFF64748B),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Tanggal Lahir',
+                style: TextStyle(
+                  color: Color(0xFF0F172A),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 14),
+              Text(
+                state?.birthDate ?? "",
+                style: const TextStyle(
+                  color: Color(0xFF64748B),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 30),
+              CommonButton(
+                titleColor: Colors.white,
+                title: 'Keluar',
+                color: const Color(0xFFEF4444),
+                onTap: () {
+                  controller.logout().then((value) => Get.offNamed(Routes.splash));
+                },
+              ),
+            ],
           ),
-          const SizedBox(height: 14),
-          const Text(
-            'Jude Bellingham',
-            style: TextStyle(
-              color: Color(0xFF64748B),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Username',
-            style: TextStyle(
-              color: Color(0xFF0F172A),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 14),
-          const Text(
-            'judebellingham430',
-            style: TextStyle(
-              color: Color(0xFF64748B),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Email',
-            style: TextStyle(
-              color: Color(0xFF0F172A),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 14),
-          const Text(
-            'judebel@gmail.com',
-            style: TextStyle(
-              color: Color(0xFF64748B),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Tanggal Lahir',
-            style: TextStyle(
-              color: Color(0xFF0F172A),
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 14),
-          const Text(
-            '21 September 1996',
-            style: TextStyle(
-              color: Color(0xFF64748B),
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 30),
-          CommonButton(
-            titleColor: Colors.white,
-            title: 'Keluar',
-            color: const Color(0xFFEF4444),
-            onTap: () {},
-          ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
 
-class ProfileBodyPanel extends StatelessWidget {
+class ProfileBodyPanel extends GetView<ProfileController> {
   const ProfileBodyPanel({super.key});
 
   @override
@@ -150,37 +158,40 @@ class ProfileBodyPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              const SizedBox(width: 12),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          controller.obx((state) {
+              return Row(
                 children: [
-                  Text(
-                    "Jude Bellingham",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
-                  Text(
-                    "judebellingham430",
-                    style: TextStyle(
-                        color: Color(0xFF94A3B8),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        state?.name ?? "",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        state?.email ?? "",
+                        style: const TextStyle(
+                            color: Color(0xFF94A3B8),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
                 ],
-              ),
-            ],
+              );
+            }
           ),
         ],
       ),

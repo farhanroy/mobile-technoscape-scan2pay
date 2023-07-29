@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: Themes.appTheme(),
-      initialRoute: Routes.dashboard,
+      initialRoute: Routes.splash,
       getPages: Routes.list,
     );
   }

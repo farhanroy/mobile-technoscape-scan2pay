@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/routes.dart';
 import '../../utils/constants.dart';
@@ -16,8 +17,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2))
-        .then((value) => Get.toNamed(Routes.login));
+    checkIsLogin();
+  }
+
+  Future<void> checkIsLogin() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final pref = await SharedPreferences.getInstance();
+    String? token = pref.getString('token');
+    if (token == null) {
+      Get.toNamed(Routes.login);
+    } else {
+      Get.toNamed(Routes.dashboard);
+    }
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../widgets/widgets.dart';
+import '../controller/profile_controller.dart';
 
 class HomeScreen extends GetView<HomeScreen> {
   const HomeScreen({super.key});
@@ -25,82 +26,88 @@ class HomeScreen extends GetView<HomeScreen> {
           1,
         ),
         panel: const HomeMainPanel(),
-        body: const HomeBodyPanel(),
+        body: HomeBodyPanel(),
       ),
     );
   }
 }
 
 class HomeBodyPanel extends StatelessWidget {
-  const HomeBodyPanel({super.key});
+  HomeBodyPanel({super.key});
+
+  final profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFF334155),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 50),
-          Row(
+    return profileController.obx((state) {
+        return Container(
+          color: const Color(0xFF334155),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-              ),
-              const SizedBox(width: 6),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(height: 50),
+              Row(
                 children: [
-                  Text(
-                    "Halo,",
-                    style: TextStyle(
-                        color: Color(0xFF94A3B8),
-                        fontSize: 11,
-                        fontWeight: FontWeight.w500),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                   ),
-                  Text(
-                    "Jude Bellingham",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                  const SizedBox(width: 12),
+                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Halo,",
+                        style: TextStyle(
+                            color: Color(0xFF94A3B8),
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 8,),
+                      Text(
+                        state?.name ?? "",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
                 ],
               ),
+              const SizedBox(height: 50),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Limit Transaksi Tersisa',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "IDR ${state?.limitCredit ?? 0},-",
+                      style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Get.theme.primaryColor),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
-          const SizedBox(height: 50),
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Limit Transaksi Tersisa',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'IDR 2.500.000,-',
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Get.theme.primaryColor),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 }

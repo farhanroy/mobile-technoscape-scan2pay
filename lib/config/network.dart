@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/constants.dart';
 import '../utils/logging_interceptor.dart';
@@ -21,6 +23,7 @@ class Network {
     return BaseOptions(
       baseUrl: Constants.baseUrl,
       contentType: Headers.jsonContentType,
+        followRedirects: true
     );
   }
 
@@ -55,6 +58,42 @@ class Network {
   }
 
   // Post:----------------------------------------------------------------------
+  Future<Response> getWithToken(
+      String url, {
+        data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
+      }) async {
+    try {
+      final pref = await SharedPreferences.getInstance();
+      String? token = pref.getString('token');
+
+      final Response response = await _dio.get(
+        url,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer $token"
+            }
+        ),
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return response;
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  // Post:----------------------------------------------------------------------
   Future<Response> post(
       String url, {
         data,
@@ -82,6 +121,43 @@ class Network {
   }
 
   // Post:----------------------------------------------------------------------
+  Future<Response> postWithToken(
+      String url, {
+        data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
+      }) async {
+    try {
+      final pref = await SharedPreferences.getInstance();
+      String? token = pref.getString('token');
+
+      final Response response = await _dio.post(
+        url,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer $token"
+            }
+        ),
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return response;
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
+  // Post:----------------------------------------------------------------------
   Future<Response> put(
       String url, {
         data,
@@ -96,13 +172,50 @@ class Network {
         url,
         data: data,
         queryParameters: queryParameters,
-        options: options,
+        options: options ?? defaultOption(),
         cancelToken: cancelToken,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
       return response;
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  // Put:----------------------------------------------------------------------
+  Future<Response> putWithToken(
+      String url, {
+        data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
+      }) async {
+    try {
+      final pref = await SharedPreferences.getInstance();
+      String? token = pref.getString('token');
+
+      final Response response = await _dio.put(
+        url,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(
+            contentType: Headers.jsonContentType,
+            responseType: ResponseType.json,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': "$token"
+            }
+        ),
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return response;
+    } catch (e) {
+      print(e);
       rethrow;
     }
   }

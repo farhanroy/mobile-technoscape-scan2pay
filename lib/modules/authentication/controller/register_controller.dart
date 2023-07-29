@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:scan2pay/services/auth_service.dart';
 
+import '../../../services/auth_service.dart';
+import '../../../services/user_service.dart';
 import '../../../models/user_model.dart';
 
 class RegisterController extends GetxController {
@@ -11,6 +12,7 @@ class RegisterController extends GetxController {
   final genderList = ['Laki Laki', 'Perempuan'];
 
   final _authService = AuthService();
+  final _userService = UserService();
 
   void changeGender(int value) {
     selectedGender.value = value;
@@ -21,6 +23,7 @@ class RegisterController extends GetxController {
     try {
       final result = await _authService.register(userModel.toJson());
       await _authService.login(userModel.email!, userModel.password!);
+      await _userService.createBankAccount();
       isLoading.value = false;
     } catch(e) {
       isLoading.value = false;
