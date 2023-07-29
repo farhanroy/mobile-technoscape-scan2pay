@@ -1,3 +1,5 @@
 import 'package:get/get.dart';
 
-class PinController extends GetxController {}
+class PinController extends GetxController {
+
+}

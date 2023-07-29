@@ -35,7 +35,7 @@ class ScanScreen extends GetView<ScanController> {
           ),
           onPressed: () {
             controllerScanner?.dispose();
-            Get.back();
+            Get.offNamed(Routes.dashboard);
           },
         ),
       ),
@@ -130,6 +130,7 @@ class ScanScreen extends GetView<ScanController> {
     this.controllerScanner = controller;
     controller.scannedDataStream.listen((scanData) {
       result = scanData;
+      Get.toNamed(Routes.pin, arguments: scanData.code);
     });
   }
 }

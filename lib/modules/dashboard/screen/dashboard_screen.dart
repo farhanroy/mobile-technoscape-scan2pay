@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../../config/routes.dart';
 import '../dashboard.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -87,6 +88,12 @@ class DashboardScreen extends GetView<DashboardController> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
+          onItemSelected: (index) {
+            print(index);
+            if (index == 2) {
+              Get.toNamed(Routes.scanner);
+            }
+          },
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
         duration: Duration(milliseconds: 200),

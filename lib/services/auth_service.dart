@@ -13,6 +13,7 @@ class AuthService {
       final prefs = await SharedPreferences.getInstance();
       Map responseData = result.data as Map<String, dynamic>;
       await prefs.setString('token', responseData['token']);
+      await prefs.setString('id',responseData['data']['ID']);
       return UserModel.fromJson(responseData['data']);
     } catch(e) {
       throw Exception(e);

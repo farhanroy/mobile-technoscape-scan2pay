@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../widgets/widgets.dart';
+import '../controller/dashboard_controller.dart';
 import '../controller/profile_controller.dart';
 
 class HomeScreen extends GetView<HomeScreen> {
@@ -25,7 +27,7 @@ class HomeScreen extends GetView<HomeScreen> {
           ),
           1,
         ),
-        panel: const HomeMainPanel(),
+        panel: HomeMainPanel(),
         body: HomeBodyPanel(),
       ),
     );
@@ -113,7 +115,9 @@ class HomeBodyPanel extends StatelessWidget {
 }
 
 class HomeMainPanel extends StatelessWidget {
-  const HomeMainPanel({super.key});
+  HomeMainPanel({super.key});
+
+  final dashboardController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -132,20 +136,24 @@ class HomeMainPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return TransactionItem(
-                logo: Image.asset('assets/images/logo-transaction.png'),
-                title: 'Pembayaran Tagihan',
-                date: '28 Juli',
-                amount: '200k',
-                amountColor: const Color(0xFF10B981),
+          dashboardController.obx((state) {
+              return ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: state?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return TransactionItem(
+                    logo: Image.asset('assets/images/logo-transaction.png'),
+                    title: dashboardController.userId.value != state![index].senderId ? state[index].sender!.name! : state[index].receiver!.name!,
+                    date: DateFormat.yMMM().format(state[index].createdAt),
+                    amount: "${state[index].amount / 1000}k",
+                    amountColor: dashboardController.userId.value != state[index].senderId ? const Color(0xFF10B981) : Colors.redAccent,
+                  );
+                },
               );
             },
+            onEmpty: Container(),
           ),
         ],
       ),

@@ -10,6 +10,10 @@ class Routes {
 
   static const checkPin = '/checkPin';
 
+  static const qrCode = '/qrCode';
+  static const pin = '/pin';
+  static const summary = '/summary';
+
   static const dashboard = '/dashboard';
   static const profile = '/profile';
   static const history = '/history';
@@ -22,10 +26,7 @@ class Routes {
         name: splash,
         page: () => const SplashScreen(),
         binding: SplashBinding()),
-    GetPage(
-        name: login,
-        page: () => LoginScreen(),
-        binding: LoginBinding()),
+    GetPage(name: login, page: () => LoginScreen(), binding: LoginBinding()),
     GetPage(
         name: register,
         page: () => RegisterScreen(),
@@ -38,7 +39,7 @@ class Routes {
         name: checkPin,
         page: () => const CheckPinScreen(),
         binding: CheckPinBinding()),
-  GetPage(
+    GetPage(
         name: dashboard,
         page: () => const DashboardScreen(),
         binding: DahsboardBinding()),
@@ -51,13 +52,29 @@ class Routes {
         page: () => const HistoryScreen(),
         binding: HistoryBinding()),
     GetPage(
-        name: scanner,
-        page: () => const DashboardScreen(),
-        binding: ScannerBinding()),
+      name: scanner,
+      page: () => ScanScreen(),
+      binding: ScanBinding(),
+    ),
     GetPage(
       name: preview,
-      page: () => PreviewScreen(),
+      page: () => const PreviewScreen(),
       binding: PreviewBinding(),
+    ),
+    GetPage(
+      name: qrCode,
+      page: () => const QRCodeScreen(),
+      binding: QRCodeBinding(),
+    ),
+    GetPage(
+      name: pin,
+      page: () => const PinScreen(),
+      binding: PinBinding(),
+    ),
+    GetPage(
+      name: summary,
+      page: () => const SummaryScreen(),
+      binding: SummaryBinding(),
     )
   ];
 }
