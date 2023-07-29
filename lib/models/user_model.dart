@@ -1,36 +1,72 @@
 class UserModel {
-  final String? id;
-  final String? ktp;
-  final String? phoneNumber;
-  final int? gender;
-  final String? birthDate;
-  final String? name;
-  final String? email;
-  final String? pinNumber;
-  final String? password;
+  dynamic deletedAt;
+  String? id;
+  String? ktp;
+  String? phonenumber;
+  int? gender;
+  String? birthDate;
+  String? name;
+  String? email;
+  String? pinNumber;
+  int? limitCredit;
+  int? totalCredit;
+  String? password;
+  String? accountName;
+  String? accountNumber;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  dynamic? sentTransaction;
+  dynamic? receiveedTransaction;
 
   UserModel({
-    this.id, this.ktp, this.phoneNumber, this.gender, this.birthDate, this.name, this.email, this.pinNumber, this.password});
+    this.deletedAt,
+    this.id,
+    this.ktp,
+    this.phonenumber,
+    this.gender,
+    this.birthDate,
+    this.name,
+    this.email,
+    this.pinNumber,
+    this.limitCredit,
+    this.totalCredit,
+    this.password,
+    this.accountName,
+    this.accountNumber,
+    this.createdAt,
+    this.updatedAt,
+    this.sentTransaction,
+    this.receiveedTransaction,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-    id: json['id'],
-    ktp: json['ktp'],
-    phoneNumber: json['phoneNumber'],
-    gender: json['gender'],
-    birthDate: json['birthDate'],
-    name: json['name'],
-    email: json['email'],
-    password: json['passowrd'],
-    pinNumber: json['pinNumber']
+    deletedAt: json["DeletedAt"],
+    id: json["ID"],
+    ktp: json["KTP"],
+    phonenumber: json["Phonenumber"],
+    gender: json["Gender"],
+    birthDate: json["BirthDate"],
+    name: json["Name"],
+    email: json["Email"],
+    pinNumber: json["PinNumber"],
+    limitCredit: json["LimitCredit"],
+    totalCredit: json["TotalCredit"],
+    password: json["Password"],
+    accountName: json["AccountName"],
+    accountNumber: json["AccountNumber"],
+    createdAt: DateTime.parse(json["CreatedAt"]),
+    updatedAt: DateTime.parse(json["UpdatedAt"]),
+    sentTransaction: json["SentTransaction"],
+    receiveedTransaction: json["ReceiveedTransaction"],
   );
 
   Map<String, dynamic> toJson() => {
-    'ktpId': ktp,
-    'username': name,
-    'loginPassword': password,
-    'phoneNumber': phoneNumber,
-    'birthDate': birthDate,
-    'gender': gender,
-    'email': email,
+    "KTP": ktp,
+    "Name": name,
+    "LoginPassword": password,
+    "Phonenumber": phonenumber,
+    "BirthDate": birthDate,
+    "Gender": gender,
+    "Email": email,
   };
 }

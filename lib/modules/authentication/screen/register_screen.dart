@@ -200,7 +200,7 @@ class RegisterScreen extends GetView<RegisterController> {
                                 ktp: _ktpController.text,
                                 name: _nameController.text,
                                 password: _passwordController.text,
-                                phoneNumber: _phoneController.text,
+                                phonenumber: _phoneController.text,
                                 birthDate: _birthDateController.text,
                                 gender: controller.selectedGender.value,
                                 email: _emailController.text
@@ -240,28 +240,26 @@ class RegisterScreen extends GetView<RegisterController> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 20),
+                    CommonButton(
+                      titleColor: Get.theme.colorScheme.secondary,
+                      color: Get.theme.primaryColor,
+                      title: 'Daftar',
+                      onTap: () {},
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Sudah punya akun?'),
+                        TextButton(
+                          onPressed: () => Get.toNamed(Routes.login),
+                          child: const Text('Masuk'),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-
-                  const SizedBox(height: 20),
-                  CommonButton(
-                    titleColor: Get.theme.colorScheme.secondary,
-                    color: Get.theme.primaryColor,
-                    title: 'Daftar',
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Sudah punya akun?'),
-                      TextButton(
-                        onPressed: () => Get.toNamed(Routes.login),
-                        child: const Text('Masuk'),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
           ],
